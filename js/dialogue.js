@@ -1,54 +1,77 @@
 const Dialogue = (() => {
-  let _resolve=null, _typeTimer=null;
-  const overlay  = ()=>document.getElementById('dialogue-overlay');
-  const portrait = ()=>document.getElementById('dialogue-portrait-img');
-  const speaker  = ()=>document.getElementById('dialogue-speaker');
-  const titleLbl = ()=>document.getElementById('dialogue-title-label');
-  const textEl   = ()=>document.getElementById('dialogue-text');
-  const choices  = ()=>document.getElementById('dialogue-choices');
-  const btnGame  = ()=>document.getElementById('btn-play-game');
-  const closeBtn = ()=>document.getElementById('dialogue-close');
-  const panel    = ()=>document.getElementById('dialogue-panel');
+  let _resolve=null, _typeTimer=null, _typeDone=false;
+  const overlay   = ()=>document.getElementById('dialogue-overlay');
+  const portrait  = ()=>document.getElementById('dialogue-portrait-img');
+  const speakerTag= ()=>document.getElementById('dialogue-speaker-tag');
+  const textEl    = ()=>document.getElementById('dialogue-text');
+  const choices   = ()=>document.getElementById('dialogue-choices');
+  const btnGame   = ()=>document.getElementById('btn-play-game');
+  const closeBtn  = ()=>document.getElementById('dialogue-close');
+  const hint      = ()=>document.getElementById('dialogue-continue-hint');
 
   function open(npc){
     portrait().src = npc.portraitImg || '';
     portrait().alt = npc.name;
-    speaker().textContent  = npc.name;
-    speaker().style.color  = npc.colour || '#f5c842';
-    titleLbl().textContent = npc.title || '';
-    choices().innerHTML='';
+    speakerTag().textContent = npc.name;
+    choices().innerHTML = '';
     btnGame().classList.add('hidden');
-    textEl().textContent='';
+    textEl().textContent = '';
+    hint().classList.remove('show');
     overlay().classList.remove('hidden');
   }
 
   function close(){
     overlay().classList.add('hidden');
     clearTimeout(_typeTimer);
-    choices().innerHTML='';
+    choices().innerHTML = '';
     btnGame().classList.add('hidden');
+    hint().classList.remove('show');
     if(_resolve){_resolve(null);_resolve=null;}
   }
 
-  function type(text,speed=24){
+  function type(text, speed=22){
     return new Promise(res=>{
       clearTimeout(_typeTimer);
+      _typeDone = false;
+      hint().classList.remove('show');
       textEl().textContent='';
       let i=0;
       function tick(){
-        if(i<text.length){textEl().textContent+=text[i++];_typeTimer=setTimeout(tick,speed);}
-        else res();
+        if(i<text.length){
+          textEl().textContent+=text[i++];
+          _typeTimer=setTimeout(tick,speed);
+        } else {
+          _typeDone=true;
+          res();
+        }
       }
       tick();
     });
   }
 
-  async function show(npc,lines,opts={}){
+  // Skip typing on click
+  function skipOrWait(){
+    return new Promise(res=>{
+      hint().classList.add('show');
+      const handler=()=>{
+        document.removeEventListener('keydown',handler);
+        overlay().removeEventListener('click',handler);
+        hint().classList.remove('show');
+        res();
+      };
+      setTimeout(()=>{
+        overlay().addEventListener('click',handler,{once:true});
+        document.addEventListener('keydown',handler,{once:true});
+      },80);
+    });
+  }
+
+  async function show(npc, lines, opts={}){
     open(npc);
     for(let i=0;i<lines.length;i++){
       await type(lines[i]);
       if(i<lines.length-1){
-        await waitClick();
+        await skipOrWait();
         textEl().textContent='';
       }
     }
@@ -56,21 +79,28 @@ const Dialogue = (() => {
     if(opts.gameLabel){
       btnGame().textContent=opts.gameLabel;
       btnGame().classList.remove('hidden');
+      hint().classList.remove('show');
       return await new Promise(res=>{
         _resolve=res;
         btnGame().onclick=()=>{_resolve=null;close();res('play');};
         closeBtn().onclick=()=>close();
       });
     }
+    // final line — show continue hint
+    hint().classList.add('show');
     return await new Promise(res=>{
       _resolve=res;
-      closeBtn().onclick=()=>{close();res(null);};
-      overlay().onclick=(e)=>{if(e.target===overlay()){close();res(null);}};
+      const done=()=>{hint().classList.remove('show');close();res(null);};
+      closeBtn().onclick=done;
+      const clickHandler=(e)=>{if(e.target!==btnGame()){done();}};
+      setTimeout(()=>overlay().addEventListener('click',clickHandler,{once:true}),100);
+      document.addEventListener('keydown',done,{once:true});
     });
   }
 
   function showChoices(arr){
     choices().innerHTML='';
+    hint().classList.remove('show');
     return new Promise(res=>{
       _resolve=res;
       arr.forEach(c=>{
@@ -81,13 +111,6 @@ const Dialogue = (() => {
         choices().appendChild(btn);
       });
       closeBtn().onclick=()=>{close();res(null);};
-    });
-  }
-
-  function waitClick(){
-    return new Promise(res=>{
-      const h=()=>{panel().removeEventListener('click',h);document.removeEventListener('keydown',h);res();};
-      setTimeout(()=>{panel().addEventListener('click',h,{once:true});document.addEventListener('keydown',h,{once:true});},120);
     });
   }
 

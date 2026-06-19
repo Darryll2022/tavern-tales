@@ -1,7 +1,7 @@
 const NPCS = {
   edda: {
     id:'edda', name:'Edda', title:'Innkeeper of The Wandering Crow',
-    portrait:'🧑‍🍳', portraitImg:'img/edda.png', colour:'#f5c842',
+    portrait:'🧑‍🍳', portraitImg:'img/edda_med.png', colour:'#f5c842',
     game:'wordle', gameLabel:'Play Her Word Game',
     intro:[
       "The innkeeper looks up from polishing a tankard, her braids catching the firelight.",
@@ -13,7 +13,7 @@ const NPCS = {
   },
   aldric: {
     id:'aldric', name:'Sir Aldric', title:'Retired Knight of the Realm',
-    portrait:'🪖', portraitImg:'img/aldric.jpg', colour:'#9eb8d9',
+    portrait:'🪖', portraitImg:'img/aldric_med.png', colour:'#9eb8d9',
     game:'chess', gameLabel:'Accept the Challenge',
     intro:[
       "A broad-shouldered man in worn armour sits alone, a chess set arranged before him. He hasn't touched his ale.",
@@ -25,7 +25,7 @@ const NPCS = {
   },
   mira: {
     id:'mira', name:'Mira', title:'Travelling Merchant',
-    portrait:'🪙', portraitImg:'img/mira.png', colour:'#c8a96e',
+    portrait:'🪙', portraitImg:'img/mira_med.png', colour:'#c8a96e',
     game:'dice', gameLabel:'Roll the Dice with Her',
     intro:[
       "A young woman sits at the corner table, fingers drumming nervously on a leather satchel. Coins are laid out in careful rows before her.",
@@ -37,7 +37,7 @@ const NPCS = {
   },
   fenwick: {
     id:'fenwick', name:'Old Fenwick', title:'Hermit Sage',
-    portrait:'🧙', portraitImg:'img/fenwick.png', colour:'#b89fd4',
+    portrait:'🧙', portraitImg:'img/fenwick_med.png', colour:'#b89fd4',
     game:'riddle', gameLabel:'Answer His Riddles',
     intro:[
       "An old man in a smoke-stained robe sits alone near the window, watching the rain. He smells faintly of pine and something older.",
@@ -49,7 +49,7 @@ const NPCS = {
   },
   lyra: {
     id:'lyra', name:'Lyra', title:'Wandering Bard',
-    portrait:'🎵', portraitImg:'img/lyra.png', colour:'#f0a8c8',
+    portrait:'🎵', portraitImg:'img/lyra_med.png', colour:'#f0a8c8',
     game:'memory', gameLabel:'Play the Memory Game',
     intro:[
       "A young woman with a lute on her back is nursing a cider in the corner. She's been humming softly all evening.",

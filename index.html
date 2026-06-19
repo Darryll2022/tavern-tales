@@ -81,22 +81,25 @@
     </div>
   </div>
 
-  <!-- DIALOGUE OVERLAY -->
+  <!-- DIALOGUE OVERLAY — parchment RPG style -->
   <div id="dialogue-overlay" class="hidden">
     <div id="dialogue-panel">
-      <div id="dialogue-header">
-        <img id="dialogue-portrait-img" src="" alt="" />
-        <div id="dialogue-header-right">
-          <button id="dialogue-close" aria-label="Close">✕</button>
-          <div id="dialogue-speaker"></div>
-          <div id="dialogue-title-label"></div>
+      <button id="dialogue-close" aria-label="Close">✕</button>
+      <div id="dialogue-inner-row">
+        <!-- Medallion portrait -->
+        <div id="dialogue-medallion-wrap">
+          <img id="dialogue-portrait-img" src="" alt="" />
+          <div id="dialogue-medallion-frame"></div>
+          <div id="dialogue-speaker-tag"></div>
+        </div>
+        <!-- Parchment text box -->
+        <div id="dialogue-parchment">
+          <p id="dialogue-text"></p>
+          <div id="dialogue-choices"></div>
+          <button id="btn-play-game" class="btn-primary hidden"></button>
+          <span id="dialogue-continue-hint">▼</span>
         </div>
       </div>
-      <div id="dialogue-body">
-        <p id="dialogue-text"></p>
-      </div>
-      <div id="dialogue-choices"></div>
-      <button id="btn-play-game" class="btn-primary hidden"></button>
     </div>
   </div>
 
