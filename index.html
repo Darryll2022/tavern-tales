@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TavernTales — The Wandering Crow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- TITLE SCREEN -->
+  <div id="title-screen" class="screen active">
+    <div class="rain-overlay"></div>
+    <div class="title-inner">
+      <div class="title-torch">🔥</div>
+      <h1 class="title-main">TAVERN<br>TALES</h1>
+      <p class="title-inn">— The Wandering Crow —</p>
+      <p class="title-flavour">"Five strangers. One night.<br>Every secret has a price."</p>
+      <button class="btn-primary pulse" id="btn-start">PUSH OPEN THE DOOR</button>
+      <p class="title-credit">by Darryll</p>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="screen hidden">
+    <div id="top-bar">
+      <span id="tavern-title">⚔ THE WANDERING CROW ⚔</span>
+      <div id="quest-tracker">
+        <span class="tracker-label">TALES:</span>
+        <span class="dot inactive" id="dot-edda"    title="Edda">◆</span>
+        <span class="dot inactive" id="dot-aldric"  title="Sir Aldric">◆</span>
+        <span class="dot inactive" id="dot-mira"    title="Mira">◆</span>
+        <span class="dot inactive" id="dot-fenwick" title="Fenwick">◆</span>
+        <span class="dot inactive" id="dot-lyra"    title="Lyra">◆</span>
+      </div>
+    </div>
+
+    <div id="tavern-scene">
+      <div class="scene-atmosphere"></div>
+      <div class="scene-bar">
+        <div class="bar-shelves">🍶 🍷 🍺 🥃 🍾</div>
+        <div class="bar-counter"></div>
+      </div>
+      <div class="fireplace"><div class="fire-emoji">🔥</div></div>
+      <div class="table t1"></div>
+      <div class="table t2"></div>
+
+      <div class="npc" id="npc-edda"    data-npc="edda"    style="left:10%;top:36%">
+        <div class="npc-glow"></div><div class="npc-sprite">🧑‍🍳</div>
+        <div class="npc-nameplate">Edda</div>
+        <div class="npc-badge" id="badge-edda">TALK</div>
+      </div>
+      <div class="npc" id="npc-aldric"  data-npc="aldric"  style="left:61%;top:42%">
+        <div class="npc-glow"></div><div class="npc-sprite">🪖</div>
+        <div class="npc-nameplate">Sir Aldric</div>
+        <div class="npc-badge" id="badge-aldric">TALK</div>
+      </div>
+      <div class="npc" id="npc-mira"    data-npc="mira"    style="left:43%;top:54%">
+        <div class="npc-glow"></div><div class="npc-sprite">🪙</div>
+        <div class="npc-nameplate">Mira</div>
+        <div class="npc-badge" id="badge-mira">TALK</div>
+      </div>
+      <div class="npc" id="npc-fenwick" data-npc="fenwick" style="left:23%;top:57%">
+        <div class="npc-glow"></div><div class="npc-sprite">🧙</div>
+        <div class="npc-nameplate">Old Fenwick</div>
+        <div class="npc-badge" id="badge-fenwick">TALK</div>
+      </div>
+      <div class="npc" id="npc-lyra"    data-npc="lyra"    style="left:79%;top:48%">
+        <div class="npc-glow"></div><div class="npc-sprite">🎵</div>
+        <div class="npc-nameplate">Lyra</div>
+        <div class="npc-badge" id="badge-lyra">TALK</div>
+      </div>
+
+      <div id="hidden-door" class="locked">
+        <div class="door-sprite">🚪</div>
+        <div class="door-label">???</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIALOGUE OVERLAY — parchment RPG style -->
+  <div id="dialogue-overlay" class="hidden">
+    <div id="dialogue-panel">
+      <button id="dialogue-close" aria-label="Close">✕</button>
+      <div id="dialogue-inner-row">
+        <!-- Medallion portrait -->
+        <div id="dialogue-medallion-wrap">
+          <img id="dialogue-portrait-img" src="" alt="" />
+          <div id="dialogue-medallion-frame"></div>
+          <div id="dialogue-speaker-tag"></div>
+        </div>
+        <!-- Parchment text box -->
+        <div id="dialogue-parchment">
+          <p id="dialogue-text"></p>
+          <div id="dialogue-choices"></div>
+          <button id="btn-play-game" class="btn-primary hidden"></button>
+          <span id="dialogue-continue-hint">▼</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORDLE -->
+  <div id="wordle-overlay" class="hidden">
+    <div id="wordle-panel">
+      <div id="wordle-header">
+        <span>🧑‍🍳 EDDA'S WORD GAME</span>
+        <button id="wordle-close">✕</button>
+      </div>
+      <p id="wordle-hint" class="mini-subtext"></p>
+      <p class="mini-subtext">Guess the 6-letter word — 6 tries.</p>
+      <div id="wordle-grid"></div>
+      <div id="wordle-keyboard"></div>
+      <p id="wordle-message"></p>
+    </div>
+  </div>
+
+  <!-- DICE -->
+  <div id="dice-overlay" class="hidden">
+    <div id="dice-panel">
+      <div id="dice-header">
+        <span>🪙 MIRA'S DICE POKER</span>
+        <button id="dice-close">✕</button>
+      </div>
+      <p class="mini-subtext">Best of 2 rounds. Lock dice, re-roll up to 3x.</p>
+      <div id="dice-scoreboard">Round <span id="dice-round">1</span>/2 &nbsp;|&nbsp; You: <span id="score-player">0</span> &nbsp; Mira: <span id="score-mira">0</span></div>
+      <div id="dice-row"></div>
+      <p id="dice-hand-label"></p>
+      <div id="dice-actions">
+        <span id="rerolls-left">Re-rolls: 3</span>
+        <button id="btn-reroll" class="btn-primary">ROLL</button>
+        <button id="btn-stand" class="btn-secondary hidden">STAND</button>
+      </div>
+      <p id="dice-message"></p>
+    </div>
+  </div>
+
+  <!-- RIDDLE -->
+  <div id="riddle-overlay" class="hidden">
+    <div id="riddle-panel">
+      <div id="riddle-header">
+        <span>🧙 FENWICK'S RIDDLE DUEL</span>
+        <button id="riddle-close">✕</button>
+      </div>
+      <p class="mini-subtext">3 riddles. 30 seconds each.</p>
+      <div id="riddle-progress">Riddle <span id="riddle-num">1</span>/3</div>
+      <div id="riddle-timer-bar"><div id="riddle-timer-fill"></div></div>
+      <p id="riddle-question"></p>
+      <div id="riddle-choices"></div>
+      <p id="riddle-message"></p>
+    </div>
+  </div>
+
+  <!-- MEMORY -->
+  <div id="memory-overlay" class="hidden">
+    <div id="memory-panel">
+      <div id="memory-header">
+        <span>🎵 LYRA'S MEMORY GAME</span>
+        <button id="memory-close">✕</button>
+      </div>
+      <p class="mini-subtext">Match all 8 pairs. Fewer flips = better reward.</p>
+      <div id="memory-stats">Flips: <span id="flip-count">0</span></div>
+      <div id="memory-grid"></div>
+      <p id="memory-message"></p>
+    </div>
+  </div>
+
+  <!-- CHESS -->
+  <div id="chess-overlay" class="hidden">
+    <div id="chess-panel">
+      <div id="chess-header">
+        <span>🪖 SIR ALDRIC'S CHESS</span>
+        <button id="chess-close">✕</button>
+      </div>
+      <p class="chess-subtext">Click a piece, then click its destination.</p>
+      <div id="chess-status"></div>
+      <div id="chess-board"></div>
+      <p id="chess-message"></p>
+    </div>
+  </div>
+
+  <!-- ENDING -->
+  <div id="ending-screen" class="screen hidden">
+    <div class="rain-overlay"></div>
+    <div id="ending-inner">
+      <div id="ending-icon"></div>
+      <h2 id="ending-title"></h2>
+      <p id="ending-subtitle"></p>
+      <p id="ending-text"></p>
+      <div id="ending-buttons">
+        <button class="btn-primary"  id="btn-restart">PLAY AGAIN</button>
+        <button class="btn-secondary" id="btn-home">HOME</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/wordle.js"></script>
+  <script src="js/dice.js"></script>
+  <script src="js/riddle.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/chess.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
