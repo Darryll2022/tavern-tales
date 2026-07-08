@@ -13,7 +13,7 @@ const NPCS = {
   },
   aldric: {
     id:'aldric', name:'Sir Aldric', title:'Retired Knight of the Realm',
-    portrait:'🪖', portraitImg:'img/aldric_med.jpg', colour:'#9eb8d9',
+    portrait:'🪖', portraitImg:'img/aldric_portrait.png', colour:'#9eb8d9',
     game:'chess', gameLabel:'Accept the Challenge',
     intro:[
       "A broad-shouldered man in worn armour sits alone, a chess set arranged before him. He hasn't touched his ale.",
