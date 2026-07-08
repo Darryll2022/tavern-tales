@@ -32,7 +32,7 @@ button{font-family:var(--font);cursor:pointer;border:none}
 .title-credit{font-size:7px;color:#a07850}
 
 /* GAME */
-#game-screen{background:url('../img/tavern_bg.png') center/cover no-repeat;flex-direction:column}
+#game-screen{background:url('../img/tavern_scene_bg.png') center/cover no-repeat;flex-direction:column}
 #top-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(10,5,0,.72);border-bottom:2px solid rgba(122,74,26,.5);height:44px;flex-shrink:0}
 #tavern-title{font-size:8px;color:var(--amber);letter-spacing:1px}
 #quest-tracker{display:flex;align-items:center;gap:6px}
