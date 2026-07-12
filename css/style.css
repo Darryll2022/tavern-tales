@@ -21,7 +21,7 @@ button{font-family:var(--font);cursor:pointer;border:none}
 @keyframes rain{from{background-position:0 0}to{background-position:20px 40px}}
 
 /* TITLE */
-#title-screen{background:url('../img/tavern_bg.png') center/cover no-repeat;flex-direction:column;align-items:center;justify-content:center}
+#title-screen{background:#0a0500;flex-direction:column;align-items:center;justify-content:center}
 #title-screen::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.55)}
 .title-inner{display:flex;flex-direction:column;align-items:center;gap:14px;z-index:1;text-align:center}
 .title-torch{font-size:40px;animation:flicker 1.2s ease-in-out infinite alternate}
@@ -32,7 +32,7 @@ button{font-family:var(--font);cursor:pointer;border:none}
 .title-credit{font-size:7px;color:#a07850}
 
 /* GAME */
-#game-screen{background:url('../img/tavern_bg.png') center/cover no-repeat;flex-direction:column}
+#game-screen{background:#0a0500;flex-direction:column}
 #top-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(10,5,0,.72);border-bottom:2px solid rgba(122,74,26,.5);height:44px;flex-shrink:0}
 #tavern-title{font-size:8px;color:var(--amber);letter-spacing:1px}
 #quest-tracker{display:flex;align-items:center;gap:6px}
@@ -41,10 +41,10 @@ button{font-family:var(--font);cursor:pointer;border:none}
 .dot.inactive{color:#3a2010}
 .dot.done{color:var(--amber);filter:drop-shadow(0 0 4px var(--amber))}
 .dot.won{color:#4caf50;filter:drop-shadow(0 0 4px #4caf50)}
-#tavern-scene{flex:1;position:relative;overflow:hidden}
-.npc{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer;transform:translateX(-50%);transition:transform .15s;z-index:10;user-select:none;padding:12px 8px;min-width:44px;min-height:44px;justify-content:flex-end}
-.npc:hover{transform:translateX(-50%) translateY(-5px)}
-.npc-glow{position:absolute;width:60px;height:20px;bottom:-4px;background:radial-gradient(ellipse,rgba(245,200,66,.35) 0%,transparent 70%);border-radius:50%}.npc-sprite{position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;filter:drop-shadow(0 3px 8px rgba(0,0,0,.75))}.npc-sprite img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid #8b5e1a;box-shadow:0 0 0 2px #c8922a,0 0 14px rgba(180,100,20,.55);display:block}
+#tavern-scene{position:relative;width:100%;max-width:600px;margin:0 auto;overflow:hidden;}
+.npc{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer;transform:translateX(-50%);z-index:10;user-select:none;}
+
+
 .npc-nameplate{font-size:8px;color:var(--parchment);background:rgba(10,5,0,.85);border:1px solid var(--parch-border);padding:2px 6px;margin-top:2px;white-space:nowrap}
 .npc-badge{font-size:6px;color:var(--amber);background:rgba(10,5,0,.9);border:1px solid var(--amber-dk);padding:2px 5px;margin-top:2px;animation:pulse 2s ease-in-out infinite}
 .npc-badge.done{color:#4caf50;border-color:#4caf50;animation:none}
@@ -164,7 +164,7 @@ button{font-family:var(--font);cursor:pointer;border:none}
 #chess-message{font-size:8px;color:var(--amber);text-align:center;min-height:18px}
 
 /* ENDING */
-#ending-screen{background:url('../img/tavern_bg.png') center/cover no-repeat;flex-direction:column;align-items:center;justify-content:center}
+#ending-screen{background:#0a0500;flex-direction:column;align-items:center;justify-content:center}
 #ending-screen::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.72)}
 #ending-inner{z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px;max-width:560px}
 #ending-icon{font-size:52px}
@@ -173,3 +173,4 @@ button{font-family:var(--font);cursor:pointer;border:none}
 #ending-text{font-size:8px;color:var(--cream);line-height:2.2;max-width:460px;white-space:pre-wrap}
 #ending-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:#1a0e05} ::-webkit-scrollbar-thumb{background:var(--brown-lt);border-radius:3px}
+#scene-img{display:block;width:100%;height:auto;}.npc-hitbox{width:70px;height:120px;border-radius:12px;}.npc:hover .npc-hitbox{background:rgba(245,200,66,.10);box-shadow:0 0 14px rgba(245,180,40,.35);}
