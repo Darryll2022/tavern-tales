@@ -32,7 +32,7 @@ button{font-family:var(--font);cursor:pointer;border:none}
 .title-credit{font-size:7px;color:#a07850}
 
 /* GAME */
-#game-screen{background:url('../img/tavern_scene_bg.png') center/cover no-repeat;flex-direction:column}
+#game-screen{background:url('../img/tavern_bg.png') center/cover no-repeat;flex-direction:column}
 #top-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(10,5,0,.72);border-bottom:2px solid rgba(122,74,26,.5);height:44px;flex-shrink:0}
 #tavern-title{font-size:8px;color:var(--amber);letter-spacing:1px}
 #quest-tracker{display:flex;align-items:center;gap:6px}
@@ -42,13 +42,10 @@ button{font-family:var(--font);cursor:pointer;border:none}
 .dot.done{color:var(--amber);filter:drop-shadow(0 0 4px var(--amber))}
 .dot.won{color:#4caf50;filter:drop-shadow(0 0 4px #4caf50)}
 #tavern-scene{flex:1;position:relative;overflow:hidden}
-.npc{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer;transform:translateX(-50%);transition:transform .15s;z-index:10;user-select:none}
+.npc{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer;transform:translateX(-50%);transition:transform .15s;z-index:10;user-select:none;padding:12px 8px;min-width:44px;min-height:44px;justify-content:flex-end}
 .npc:hover{transform:translateX(-50%) translateY(-5px)}
 .npc-glow{position:absolute;width:60px;height:20px;bottom:-4px;background:radial-gradient(ellipse,rgba(245,200,66,.35) 0%,transparent 70%);border-radius:50%}
-.npc-sprite{position:relative;width:64px;height:64px;border-radius:50%;overflow:visible;filter:drop-shadow(0 3px 8px rgba(0,0,0,.75))}
-.npc-sprite img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid #8b5e1a;box-shadow:0 0 0 2px #c8922a,0 0 14px rgba(180,100,20,.55),inset 0 0 10px rgba(0,0,0,.35);display:block}
-.npc-sprite-ring{position:absolute;inset:-4px;border-radius:50%;border:3px solid transparent;background:repeating-conic-gradient(from 0deg,#a06820 0deg 10deg,#6b3a08 10deg 20deg) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
-.npc-nameplate{font-size:6px;color:var(--parchment);background:rgba(10,5,0,.85);border:1px solid var(--parch-border);padding:2px 6px;margin-top:2px;white-space:nowrap}
+.npc-nameplate{font-size:8px;color:var(--parchment);background:rgba(10,5,0,.85);border:1px solid var(--parch-border);padding:2px 6px;margin-top:2px;white-space:nowrap}
 .npc-badge{font-size:6px;color:var(--amber);background:rgba(10,5,0,.9);border:1px solid var(--amber-dk);padding:2px 5px;margin-top:2px;animation:pulse 2s ease-in-out infinite}
 .npc-badge.done{color:#4caf50;border-color:#4caf50;animation:none}
 .npc-badge.won{color:var(--amber);border-color:var(--amber);animation:none}
